@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+header {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aqua;
+}
+
+main {
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+}
+
+footer {
+  background-color:blueviolet;
+  height: 10%;
+  text-align: center;
+}
+
+.blurb-and-rules {
+  background-color: blue;
+  flex-grow: 1;
+  width: 22%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.scores-and-lives {
+  background-color: brown;
+  flex-grow: 1;
+  width: 22%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  background-color: aliceblue;
+  width:  80%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.grid-wrapper {
+  background-color: rgb(28, 215, 31);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56%;
+}
+
+.game-grid {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  width: 70vh;
+}
+
+.game-grid div {
+  border: 1px solid rgb(8, 1, 1);
+  display: inline-block;
+  aspect-ratio: 1;
+}
+
+
+
+.container {
+
+}
