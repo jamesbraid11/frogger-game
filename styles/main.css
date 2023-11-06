@@ -91,3 +91,9 @@ footer {
   transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
 }
+
+.game-grid div.dark-figure {
+  background-image: url('../assets/dark-figure.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
