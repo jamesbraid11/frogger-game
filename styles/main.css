@@ -83,3 +83,11 @@ footer {
 .container {
 
 }
+
+.game-grid div.char {
+  background-image: url('../assets/sora.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+}
