@@ -15,6 +15,10 @@ const startPos = 50
 let currentPos = startPos
 const width = 10
 const cellCount = width * width
+let darkFigureSpeed = 1000
+let lexaeusSpeed = 500
+let larxeneSpeed = 450
+let marluxiaSpeed = 400
 
 console.log(lives)
 
@@ -35,6 +39,15 @@ function createGrid() {
 
 // Must call create grid function before using methods on it
 createGrid()
+
+// Must call function movement before collision function, want them to start asap after page load as well.
+col1Movement()
+col2Movement()
+col4Movement()
+col5Movement()
+col7Movement()
+col8Movement()
+
 
 // Character movement
 function addChar() {
@@ -72,7 +85,7 @@ const col1Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blan
 
 // Create function to remove classes from column, reconfigure col1Classes array, then reassign classes to column
 function col1Movement() {
-  setInterval(() => {
+  col1Interval = setInterval(() => {
     enemyCol1.forEach(cell => {
       cell.classList.remove('blank', 'dark-figure')
     })
@@ -84,7 +97,7 @@ function col1Movement() {
         collision()
       }
     })
-  }, 1000)
+  }, darkFigureSpeed)
 }
 
 // Enemy movement column 2
@@ -105,7 +118,7 @@ function col2Movement() {
         collision()
       }
     })
-  }, 500)
+  }, lexaeusSpeed)
 }
 
 // Enemy movement column 4
@@ -126,7 +139,7 @@ function col4Movement() {
         collision()
       }
     })
-  }, 1000)
+  }, darkFigureSpeed)
 }
 
 // Enemy movement column 5
@@ -147,7 +160,7 @@ function col5Movement() {
         collision()
       }
     })
-  }, 500)
+  }, larxeneSpeed)
 }
 
 // Enemy movement column 7
@@ -168,7 +181,7 @@ function col7Movement() {
         collision()
       }
     })
-  }, 1000)
+  }, darkFigureSpeed)
 }
 
 // Enemy movement column 8
@@ -189,16 +202,9 @@ function col8Movement() {
         collision()
       }
     })
-  }, 500)
+  }, marluxiaSpeed)
 }
 
-// Must call function movement before collision function
-col1Movement()
-col2Movement()
-col4Movement()
-col5Movement()
-col7Movement()
-col8Movement()
 
 // Collision function
 function collision() {
