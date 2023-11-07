@@ -69,12 +69,7 @@ createGrid()
 const enemyCol1 = cells.filter(cell => parseInt(cell.id) % 10 === 1)
 console.log(enemyCol1)
 // Add enemy class to pattern of cells using their index in the array
-enemyCol1[1].classList.add('dark-figure')
-enemyCol1[2].classList.add('dark-figure')
-enemyCol1[4].classList.add('dark-figure')
-enemyCol1[6].classList.add('dark-figure')
-enemyCol1[7].classList.add('dark-figure')
-enemyCol1[9].classList.add('dark-figure')
+
 
 
 
@@ -88,12 +83,76 @@ enemyCol1[9].classList.add('dark-figure')
 // Once enemy classes are added to a pattern of cells, use a forEach to iterate over them and move any instance of that class down the grid by one (using same logic as character movement) Put this in a setInterval so that it happens every n seconds
 
 
-enemyCol1.forEach(function(cell, index) {
-  if (cell.classList.contains('dark-figure')) {
-    cell.classList.remove('dark-figure')
-    cell[index + 1].classList.add('dark-figure')
-  }
-})
+console.log(enemyCol1)
+
+const classNames = ['blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure']
+
+
+function col1Movement() {
+  // enemyCol1[0].classList.add('blank')
+  // enemyCol1[1].classList.add('dark-figure')
+  // enemyCol1[2].classList.add('dark-figure')
+  // enemyCol1[3].classList.add('blank')
+  // enemyCol1[4].classList.add('dark-figure')
+  // enemyCol1[5].classList.add('blank')
+  // enemyCol1[6].classList.add('dark-figure')
+  // enemyCol1[7].classList.add('dark-figure')
+  // enemyCol1[8].classList.add('blank')
+  // enemyCol1[9].classList.add('dark-figure')
+  
+  const lastCell = enemyCol1[enemyCol1.length - 1]
+  const lastClass = lastCell.classList[0]
+
+  setInterval(() => {
+    
+    // enemyCol1.class.push(enemyCol1.class.shift())
+    // console.log(enemyCol1)
+    // for (let i = 0; i < enemyCol1.length; i++) {
+    //   enemyCol1[i].className = [...enemyCol1[0].classList].join(' ')
+    // }
+    // lastCell.classList.remove(lastClass)
+    // classNames.unshift(lastClass)
+    // enemyCol1.forEach((cell, i) => {
+    //   cell.classList.add(classNames[i])
+    enemyCol1.forEach(cell => {
+      cell.classList.remove('blank', 'dark-figure')
+    })
+    // lastCell.classList.remove(lastClass)
+    classNames.pop(lastClass)
+    classNames.unshift(lastClass)
+    enemyCol1.forEach((cell, i) => {
+      cell.classList.add(classNames[i])
+    })
+  }, 10000)
+}
+
+col1Movement()
+
+
+
+// enemyCol1.forEach(function(cell, index) {
+//   if (cell.classList.contains('dark-figure')) {
+//     // cell.classList.remove('dark-figure')
+//     // if (parseInt(cell[index]) === 0) {
+//     //   cell[9].classList.add('dark-figure')
+//     // } else {
+//     cell[index - 1].classList.add('dark-figure')
+//   }
+// })
+
+// enemyCol1.forEach(function(cell, index) {
+//   if (cell.classList.contains('dark-figure')) {
+//     if (parseInt(cell[index]) > enemyCol1.length - 1) {
+//       cell[0].classList.add('dark-figure')
+//     } else {
+//       cell[index + 1].classList.add('dark-figure')
+//     }
+//     cell.classList.remove('dark-figure')
+//   }
+// })
+
+
+
 
 // Set enemy class to move along the array
 // Set this to happen at an interval
