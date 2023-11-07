@@ -97,3 +97,21 @@ footer {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.game-grid div.larxene {
+  background-image: url('../assets/larxene.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.game-grid div.lexaeus {
+  background-image: url('../assets/lexaeus.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.game-grid div.marluxia {
+  background-image: url('../assets/marluxia.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

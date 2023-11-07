@@ -3,9 +3,9 @@
 const startBtn = document.querySelector('button')
 const grid = document.querySelector('.game-grid')
 let cells = []
-const livesDisplay = document.querySelector('.lives-display')
-const scoreDisplay = document.querySelector('.score-display')
-const highScoreDisplay = document.querySelector('.high-score-display')
+let livesDisplay = document.querySelector('.lives-display')
+let scoreDisplay = document.querySelector('.score-display')
+let highScoreDisplay = document.querySelector('.high-score-display')
 
 //* Variables
 let lives = 3
@@ -16,6 +16,7 @@ let currentPos = startPos
 const width = 10
 const cellCount = width * width
 
+scoreDisplay.innerText = score
 
 //* Executions
 // Grid creator function
@@ -32,6 +33,9 @@ function createGrid() {
   addChar(currentPos)
 }
 
+// Must call create grid function before using methods on it
+createGrid()
+
 // Character movement
 function addChar() {
   cells[currentPos].classList.add('char')
@@ -44,9 +48,7 @@ function removeChar() {
 // On keypress update character position
 function keyPress(evt) {
   const key = evt.code
-
   removeChar()
-  
   if (key === 'ArrowUp' && currentPos >= width) {
     currentPos -= width
   } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
@@ -56,85 +58,167 @@ function keyPress(evt) {
   } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
     currentPos++
   }
-
   addChar()
-
 }
 
-// * On Page Load
-createGrid()
-
-// Enemy appearance
+//! Enemy movement
+// Enemy movement column 1
 // Define column in grid as an array
 const enemyCol1 = cells.filter(cell => parseInt(cell.id) % 10 === 1)
 console.log(enemyCol1)
-// Add enemy class to pattern of cells using their index in the array
 
+// Create pattern of classes in an array to assign to the column
+const col1Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
 
-
-
-// enemyCol1.forEach((cell) => {
-//   if (parseInt(cell.id) === 11, 21) {
-//     cell.classList.add('dark-figure')
-//     console.log(enemyCol1)
-//   }
-// })
-
-// Once enemy classes are added to a pattern of cells, use a forEach to iterate over them and move any instance of that class down the grid by one (using same logic as character movement) Put this in a setInterval so that it happens every n seconds
-
-
-console.log(enemyCol1)
-
-const classNames = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
-
-// const lastElement = classNames[classNames.length - 1]
-// console.log(lastElement)
-
-
+// Create function to remove classes from column, reconfigure col1Classes array, then reassign classes to column
 function col1Movement() {
-  // enemyCol1[0].classList.add('blank')
-  // enemyCol1[1].classList.add('dark-figure')
-  // enemyCol1[2].classList.add('dark-figure')
-  // enemyCol1[3].classList.add('blank')
-  // enemyCol1[4].classList.add('dark-figure')
-  // enemyCol1[5].classList.add('blank')
-  // enemyCol1[6].classList.add('dark-figure')
-  // enemyCol1[7].classList.add('dark-figure')
-  // enemyCol1[8].classList.add('blank')
-  // enemyCol1[9].classList.add('dark-figure')
-  
-
-  // const lastCell = enemyCol1[enemyCol1.length - 1]
-  // const lastClass = lastCell.classList[0]
-
-  // const lastElement = classNames[classNames.length - 1]
-  // console.log(lastElement)
-
   setInterval(() => {
-    
-    // enemyCol1.class.push(enemyCol1.class.shift())
-    // console.log(enemyCol1)
-    // for (let i = 0; i < enemyCol1.length; i++) {
-    //   enemyCol1[i].className = [...enemyCol1[0].classList].join(' ')
-    // }
-    // lastCell.classList.remove(lastClass)
-    // classNames.unshift(lastClass)
-    // enemyCol1.forEach((cell, i) => {
-    //   cell.classList.add(classNames[i])
     enemyCol1.forEach(cell => {
       cell.classList.remove('blank', 'dark-figure')
     })
-    // lastCell.classList.remove(lastClass)
-    classNames.unshift(classNames[9])
-    classNames.pop(classNames[9])
-    console.log(classNames)
+    col1Classes.unshift(col1Classes[9])
+    col1Classes.pop(col1Classes[9])
     enemyCol1.forEach((cell, i) => {
-      cell.classList.add(classNames[i])
+      cell.classList.add(col1Classes[i])
     })
-  }, 800)
+  }, 1000)
 }
 
+// Enemy movement column 2
+const enemyCol2 = cells.filter(cell => parseInt(cell.id) % 10 === 2)
+console.log(enemyCol2)
+
+const col2Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'lexaeus']
+
+function col2Movement() {
+  setInterval(() => {
+    enemyCol2.forEach(cell => {
+      cell.classList.remove('blank', 'lexaeus')
+    })
+    col2Classes.push(col2Classes[0])
+    col2Classes.shift(col2Classes[0])
+    enemyCol2.forEach((cell, i) => {
+      cell.classList.add(col2Classes[i])
+    })
+  }, 500)
+}
+
+// Enemy movement column 4
+const enemyCol4 = cells.filter(cell => parseInt(cell.id) % 10 === 4)
+console.log(enemyCol4)
+
+const col4Classes = ['dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure']
+
+function col4Movement() {
+  setInterval(() => {
+    enemyCol4.forEach(cell => {
+      cell.classList.remove('blank', 'dark-figure')
+    })
+    col4Classes.push(col4Classes[0])
+    col4Classes.shift(col4Classes[0])
+    enemyCol4.forEach((cell, i) => {
+      cell.classList.add(col4Classes[i])
+    })
+  }, 1000)
+}
+
+// Enemy movement column 5
+const enemyCol5 = cells.filter(cell => parseInt(cell.id) % 10 === 5)
+console.log(enemyCol5)
+
+const col5Classes = ['larxene', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
+
+function col5Movement() {
+  setInterval(() => {
+    enemyCol5.forEach(cell => {
+      cell.classList.remove('blank', 'larxene')
+    })
+    col5Classes.unshift(col5Classes[9])
+    col5Classes.pop(col5Classes[9])
+    enemyCol5.forEach((cell, i) => {
+      cell.classList.add(col5Classes[i])
+    })
+  }, 500)
+}
+
+// Enemy movement column 7
+const enemyCol7 = cells.filter(cell => parseInt(cell.id) % 10 === 7)
+console.log(enemyCol7)
+
+const col7Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
+
+function col7Movement() {
+  setInterval(() => {
+    enemyCol7.forEach(cell => {
+      cell.classList.remove('blank', 'dark-figure')
+    })
+    col7Classes.unshift(col7Classes[9])
+    col7Classes.pop(col7Classes[9])
+    enemyCol7.forEach((cell, i) => {
+      cell.classList.add(col7Classes[i])
+    })
+  }, 1000)
+}
+
+// Enemy movement column 8
+const enemyCol8 = cells.filter(cell => parseInt(cell.id) % 10 === 8)
+console.log(enemyCol2)
+
+const col8Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'marluxia']
+
+function col8Movement() {
+  setInterval(() => {
+    enemyCol8.forEach(cell => {
+      cell.classList.remove('blank', 'marluxia')
+    })
+    col8Classes.push(col8Classes[0])
+    col8Classes.shift(col8Classes[0])
+    enemyCol8.forEach((cell, i) => {
+      cell.classList.add(col8Classes[i])
+    })
+  }, 500)
+}
+
+// Must call function movement before collision function
 col1Movement()
+col2Movement()
+col4Movement()
+col5Movement()
+col7Movement()
+col8Movement()
+
+// Collision function
+function collision(evt) {
+  // If hit any enemies
+  if (evt.target.classList.contains('dark-figure' || 'lexaeus' || 'larxene' || 'marluxia')) {
+    // Remove character from current position
+    removeChar(currentPos)
+    console.log(currentPos)
+    // Add character to start position
+    currentPos = startPos
+    console.log(currentPos)
+    addChar(currentPos)
+    console.log(currentPos)
+  //   // Remove a life
+  //   lives -= 1
+  //   // Update lives display
+  //   livesDisplay.innerText = '💚'.repeat(lives)
+  //   // Check for game over
+  //   // if (lives === 0) {
+  //   //   gameOver()
+  //   // }
+  // }
+  }
+}
+// // Game over function
+// function gameOver {
+
+// }
+
+// * On Page Load
+
+
+
 
 
 
