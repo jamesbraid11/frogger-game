@@ -78,6 +78,17 @@ footer {
   aspect-ratio: 1;
 }
 
+.game-over {
+  background-color: coral;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 58vw;
+  display: none;
+}
+
 
 
 .container {

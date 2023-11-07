@@ -1,11 +1,14 @@
 
 //* Elements
-const startBtn = document.querySelector('button')
+const startBtn = document.querySelector('.start-game')
 const grid = document.querySelector('.game-grid')
 let cells = []
 let livesDisplay = document.querySelector('.lives-display')
 let scoreDisplay = document.querySelector('.score-display')
 let highScoreDisplay = document.querySelector('.high-score-display')
+let gameOverScreen = document.querySelector('.game-over')
+let finalScoreDisplay = document.querySelector('.final-score-display')
+const playAgainBtn = document.querySelector('.play-again')
 
 //* Variables
 let lives = 3
@@ -20,7 +23,7 @@ let lexaeusSpeed = 500
 let larxeneSpeed = 450
 let marluxiaSpeed = 400
 
-console.log(lives)
+scoreDisplay.innerText = score
 
 //* Executions
 // Grid creator function
@@ -224,49 +227,27 @@ function collision() {
 
 // Game over function
 function gameOver() {
+  gameOverScreen.style.display = 'block'
+  finalScoreDisplay.innerText = score
   addChar(currentPos = startPos)
+  darkFigureSpeed = 1000
+  lexaeusSpeed = 500
+  larxeneSpeed = 450
+  marluxiaSpeed = 400
+  // 
 }
 
-// * On Page Load
 
-
-
-
-
-
-// enemyCol1.forEach(function(cell, index) {
-//   if (cell.classList.contains('dark-figure')) {
-//     // cell.classList.remove('dark-figure')
-//     // if (parseInt(cell[index]) === 0) {
-//     //   cell[9].classList.add('dark-figure')
-//     // } else {
-//     cell[index - 1].classList.add('dark-figure')
-//   }
-// })
-
-// enemyCol1.forEach(function(cell, index) {
-//   if (cell.classList.contains('dark-figure')) {
-//     if (parseInt(cell[index]) > enemyCol1.length - 1) {
-//       cell[0].classList.add('dark-figure')
-//     } else {
-//       cell[index + 1].classList.add('dark-figure')
-//     }
-//     cell.classList.remove('dark-figure')
-//   }
-// })
-
-
-
-
-// Set enemy class to move along the array
-// Set this to happen at an interval
-// Loop the array back on itself so the sequence and movement continue
-
-// Enemy movement
-
+function playAgain() {
+  gameOverScreen.style.display = 'none'
+  lives = 3
+  livesDisplay.innerText = '💚'.repeat(lives)
+  score = 0
+  scoreDisplay.innerText = score
+}
 
 
 //* Events
-// startBtn.addEventListener('click', )
+playAgainBtn.addEventListener('click', playAgain)
 
 document.addEventListener('keydown', keyPress)
