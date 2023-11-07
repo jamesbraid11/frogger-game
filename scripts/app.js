@@ -16,7 +16,7 @@ let currentPos = startPos
 const width = 10
 const cellCount = width * width
 
-scoreDisplay.innerText = score
+console.log(lives)
 
 //* Executions
 // Grid creator function
@@ -58,14 +58,14 @@ function keyPress(evt) {
   } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
     currentPos++
   }
-  addChar()
+  // Logic added to call collision function if cell moving into has an enemy class
+  cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia') ? collision() : addChar()
 }
 
 //! Enemy movement
 // Enemy movement column 1
 // Define column in grid as an array
 const enemyCol1 = cells.filter(cell => parseInt(cell.id) % 10 === 1)
-console.log(enemyCol1)
 
 // Create pattern of classes in an array to assign to the column
 const col1Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
@@ -80,13 +80,15 @@ function col1Movement() {
     col1Classes.pop(col1Classes[9])
     enemyCol1.forEach((cell, i) => {
       cell.classList.add(col1Classes[i])
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 1000)
 }
 
 // Enemy movement column 2
 const enemyCol2 = cells.filter(cell => parseInt(cell.id) % 10 === 2)
-console.log(enemyCol2)
 
 const col2Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'lexaeus']
 
@@ -99,13 +101,15 @@ function col2Movement() {
     col2Classes.shift(col2Classes[0])
     enemyCol2.forEach((cell, i) => {
       cell.classList.add(col2Classes[i])
+      if (cell.classList.contains('lexaeus') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 500)
 }
 
 // Enemy movement column 4
 const enemyCol4 = cells.filter(cell => parseInt(cell.id) % 10 === 4)
-console.log(enemyCol4)
 
 const col4Classes = ['dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure']
 
@@ -118,13 +122,15 @@ function col4Movement() {
     col4Classes.shift(col4Classes[0])
     enemyCol4.forEach((cell, i) => {
       cell.classList.add(col4Classes[i])
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 1000)
 }
 
 // Enemy movement column 5
 const enemyCol5 = cells.filter(cell => parseInt(cell.id) % 10 === 5)
-console.log(enemyCol5)
 
 const col5Classes = ['larxene', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
 
@@ -137,13 +143,15 @@ function col5Movement() {
     col5Classes.pop(col5Classes[9])
     enemyCol5.forEach((cell, i) => {
       cell.classList.add(col5Classes[i])
+      if (cell.classList.contains('larxene') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 500)
 }
 
 // Enemy movement column 7
 const enemyCol7 = cells.filter(cell => parseInt(cell.id) % 10 === 7)
-console.log(enemyCol7)
 
 const col7Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
 
@@ -156,13 +164,15 @@ function col7Movement() {
     col7Classes.pop(col7Classes[9])
     enemyCol7.forEach((cell, i) => {
       cell.classList.add(col7Classes[i])
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 1000)
 }
 
 // Enemy movement column 8
 const enemyCol8 = cells.filter(cell => parseInt(cell.id) % 10 === 8)
-console.log(enemyCol2)
 
 const col8Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'marluxia']
 
@@ -175,6 +185,9 @@ function col8Movement() {
     col8Classes.shift(col8Classes[0])
     enemyCol8.forEach((cell, i) => {
       cell.classList.add(col8Classes[i])
+      if (cell.classList.contains('marluxia') && cell.classList.contains('char')) {
+        collision()
+      }
     })
   }, 500)
 }
@@ -188,32 +201,25 @@ col7Movement()
 col8Movement()
 
 // Collision function
-function collision(evt) {
-  // If hit any enemies
-  if (evt.target.classList.contains('dark-figure' || 'lexaeus' || 'larxene' || 'marluxia')) {
-    // Remove character from current position
-    removeChar(currentPos)
-    console.log(currentPos)
-    // Add character to start position
-    currentPos = startPos
-    console.log(currentPos)
-    addChar(currentPos)
-    console.log(currentPos)
-  //   // Remove a life
-  //   lives -= 1
-  //   // Update lives display
-  //   livesDisplay.innerText = '💚'.repeat(lives)
-  //   // Check for game over
-  //   // if (lives === 0) {
-  //   //   gameOver()
-  //   // }
-  // }
+function collision() {
+  // Move character back to start position
+  removeChar(currentPos)
+  addChar(currentPos = startPos)
+  // Remove a life
+  lives -= 1
+  // Update lives display
+  livesDisplay.innerText = '💚'.repeat(lives)
+  // Check for game over
+  if (lives === 0) {
+    gameOver()
   }
 }
-// // Game over function
-// function gameOver {
 
-// }
+
+// Game over function
+function gameOver() {
+  addChar(currentPos = startPos)
+}
 
 // * On Page Load
 
