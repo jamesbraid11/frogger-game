@@ -85,7 +85,10 @@ console.log(enemyCol1)
 
 console.log(enemyCol1)
 
-const classNames = ['blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure']
+const classNames = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
+
+// const lastElement = classNames[classNames.length - 1]
+// console.log(lastElement)
 
 
 function col1Movement() {
@@ -100,8 +103,12 @@ function col1Movement() {
   // enemyCol1[8].classList.add('blank')
   // enemyCol1[9].classList.add('dark-figure')
   
-  const lastCell = enemyCol1[enemyCol1.length - 1]
-  const lastClass = lastCell.classList[0]
+
+  // const lastCell = enemyCol1[enemyCol1.length - 1]
+  // const lastClass = lastCell.classList[0]
+
+  // const lastElement = classNames[classNames.length - 1]
+  // console.log(lastElement)
 
   setInterval(() => {
     
@@ -118,12 +125,13 @@ function col1Movement() {
       cell.classList.remove('blank', 'dark-figure')
     })
     // lastCell.classList.remove(lastClass)
-    classNames.pop(lastClass)
-    classNames.unshift(lastClass)
+    classNames.unshift(classNames[9])
+    classNames.pop(classNames[9])
+    console.log(classNames)
     enemyCol1.forEach((cell, i) => {
       cell.classList.add(classNames[i])
     })
-  }, 10000)
+  }, 800)
 }
 
 col1Movement()
