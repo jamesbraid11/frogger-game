@@ -126,3 +126,15 @@ footer {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.game-grid div.pillar {
+  background-image: url('../assets/pillar.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.game-grid div.namine {
+  background-image: url('../assets/naminé.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

@@ -43,6 +43,10 @@ function createGrid() {
 // Must call create grid function before using methods on it
 createGrid()
 
+cells[13].classList.add('pillar')
+
+console.log(cells[3])
+
 // Must call function movement before collision function, want them to start asap after page load as well.
 col1Movement()
 col2Movement()
@@ -50,6 +54,13 @@ col4Movement()
 col5Movement()
 col7Movement()
 col8Movement()
+generateNamine()
+
+function generateNamine() {
+  const endCol = cells.filter(cell => parseInt(cell.id) % 10 === 9)
+  console.log(endCol)
+  endCol[Math.floor(Math.random() * endCol.length)].classList.add('namine')
+}
 
 
 // Character movement
@@ -234,7 +245,7 @@ function gameOver() {
   lexaeusSpeed = 500
   larxeneSpeed = 450
   marluxiaSpeed = 400
-  // 
+  // Update high score display?
 }
 
 
