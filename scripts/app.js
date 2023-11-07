@@ -43,10 +43,6 @@ function createGrid() {
 // Must call create grid function before using methods on it
 createGrid()
 
-cells[13].classList.add('pillar')
-
-console.log(cells[3])
-
 // Must call function movement before collision function, want them to start asap after page load as well.
 col1Movement()
 col2Movement()
@@ -55,11 +51,32 @@ col5Movement()
 col7Movement()
 col8Movement()
 generateNamine()
+generatePillars()
 
 function generateNamine() {
+  // Identify end column
   const endCol = cells.filter(cell => parseInt(cell.id) % 10 === 9)
-  console.log(endCol)
-  endCol[Math.floor(Math.random() * endCol.length)].classList.add('namine')
+  // Assign namine class to a random cell from end column
+  return endCol[Math.floor(Math.random() * endCol.length)].classList.add('namine')
+}
+
+function generatePillars() {
+  // Identify third column
+  const thirdCol = cells.filter(cell => parseInt(cell.id) % 10 === 3)
+  // Assign pillar class to every other index
+  thirdCol[1].classList.add('pillar')
+  thirdCol[3].classList.add('pillar')
+  thirdCol[5].classList.add('pillar')
+  thirdCol[7].classList.add('pillar')
+  thirdCol[9].classList.add('pillar')
+  // Identify sixth column
+  const sixthCol = cells.filter(cell => parseInt(cell.id) % 10 === 6)
+  // Assign pillar class to every other index
+  sixthCol[0].classList.add('pillar')
+  sixthCol[2].classList.add('pillar')
+  sixthCol[4].classList.add('pillar')
+  sixthCol[6].classList.add('pillar')
+  sixthCol[8].classList.add('pillar')
 }
 
 
@@ -75,6 +92,7 @@ function removeChar() {
 // On keypress update character position
 function keyPress(evt) {
   const key = evt.code
+  const lastPos = currentPos
   removeChar()
   if (key === 'ArrowUp' && currentPos >= width) {
     currentPos -= width
@@ -85,8 +103,25 @@ function keyPress(evt) {
   } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
     currentPos++
   }
-  // Logic added to call collision function if cell moving into has an enemy class
-  cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia') ? collision() : addChar()
+  // If moving into an enemy cell, invoke collision function
+  if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia')) {
+    collision()
+  // If trying to move into a pillar, send back to previous position
+  } else if (cells[currentPos].classList.contains('pillar')) {
+    if (key === 'ArrowUp' && currentPos >= width) {
+      currentPos += width
+    } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
+      currentPos -= width
+    } else if (key === 'ArrowLeft' && currentPos % width !== 0) {
+      currentPos++
+    } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
+      currentPos--
+    }
+    addChar()
+  // Else character appears in new position as calculated after character was removed
+  } else {
+    addChar()
+  }
 }
 
 //! Enemy movement
