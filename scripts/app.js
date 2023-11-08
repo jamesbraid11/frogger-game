@@ -8,7 +8,9 @@ let rikuLivesDisplay = document.querySelector('.riku-lives-display')
 let scoreDisplay = document.querySelector('.score-display')
 let rikuScoreDisplay = document.querySelector('.riku-score-display')
 let gameOverScreen = document.querySelector('.game-over')
-let finalScoreDisplay = document.querySelector('.final-score-display')
+let soraFinalScoreDisplay = document.querySelector('.sora-final-score-display')
+let rikuFinalScoreDisplay = document.querySelector('.riku-final-score-display')
+let rikuGameOverMsg = document.querySelector('.riku-game-over')
 const playAgainBtn = document.querySelector('.play-again')
 
 console.log(rikuLivesDisplay)
@@ -72,6 +74,8 @@ generateGoofy()
 function twoPlayerMode() {
   // Add Riku to his starting position
   addRiku()
+  // Unhide riku final score display
+  rikuGameOverMsg.style.display = 'block'
   // Remove two-player class from button
   // twoPlayerBtn.classList.remove('two-player') - not removing class
   // Add one-player class to button

@@ -95,6 +95,10 @@ footer {
 
 }
 
+.riku-game-over {
+  display: none;
+}
+
 .game-grid div.char {
   background-image: url('../assets/sora.gif');
   background-repeat: no-repeat;
