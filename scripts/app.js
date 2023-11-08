@@ -500,8 +500,10 @@ function rikuTargetReached() {
 // Game over function
 function gameOver() {
   gameOverScreen.style.display = 'block'
-  finalScoreDisplay.innerText = score
+  soraFinalScoreDisplay.innerText = score
+  rikuFinalScoreDisplay.innerText = rikuScore
   removeChar(currentPos)
+  removeRiku(rikuCurrentPos)
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -519,10 +521,11 @@ function gameOver() {
   col7Movement()
   col8Movement()
   cells.forEach(cell => {
-    cell.classList.remove('donald', 'goofy')
+    cell.classList.remove('donald', 'goofy', 'namine')
   })
   generateDonald()
   generateGoofy()
+  generateNamine()
   // Update high score display?
 }
 
@@ -530,10 +533,15 @@ function gameOver() {
 function playAgain() {
   gameOverScreen.style.display = 'none'
   lives = 3
+  rikuLives = 3
   livesDisplay.innerText = '💚'.repeat(lives)
+  rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
   score = 0
+  rikuScore = 0
   scoreDisplay.innerText = score
+  rikuScoreDisplay.innerText = rikuScore
   addChar(currentPos = startPos)
+  addRiku(rikuCurrentPos = rikuStartPos)
 }
 
 
