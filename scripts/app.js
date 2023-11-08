@@ -40,6 +40,8 @@ let marluxiaSpeed = 400
 
 scoreDisplay.innerText = score
 rikuScoreDisplay.innerText = rikuScore
+soraFinalScoreDisplay.innerText = score
+rikuFinalScoreDisplay.innerText = rikuScore
 
 //* Executions
 // Grid creator function
@@ -267,6 +269,9 @@ function col1Movement() {
       if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
         collision()
       }
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('riku')) {
+        rikuCollision()
+      }
     })
   }, darkFigureSpeed)
 }
@@ -287,6 +292,9 @@ function col2Movement() {
       cell.classList.add(col2Classes[i])
       if (cell.classList.contains('lexaeus') && cell.classList.contains('char')) {
         collision()
+      }
+      if (cell.classList.contains('lexaeus') && cell.classList.contains('riku')) {
+        rikuCollision()
       }
     })
   }, lexaeusSpeed)
@@ -309,6 +317,9 @@ function col4Movement() {
       if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
         collision()
       }
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('riku')) {
+        rikuCollision()
+      }
     })
   }, darkFigureSpeed)
 }
@@ -329,6 +340,9 @@ function col5Movement() {
       cell.classList.add(col5Classes[i])
       if (cell.classList.contains('larxene') && cell.classList.contains('char')) {
         collision()
+      }
+      if (cell.classList.contains('larxene') && cell.classList.contains('riku')) {
+        rikuCollision()
       }
     })
   }, larxeneSpeed)
@@ -351,6 +365,9 @@ function col7Movement() {
       if (cell.classList.contains('dark-figure') && cell.classList.contains('char')) {
         collision()
       }
+      if (cell.classList.contains('dark-figure') && cell.classList.contains('riku')) {
+        rikuCollision()
+      }
     })
   }, darkFigureSpeed)
 }
@@ -371,6 +388,9 @@ function col8Movement() {
       cell.classList.add(col8Classes[i])
       if (cell.classList.contains('marluxia') && cell.classList.contains('char')) {
         collision()
+      }
+      if (cell.classList.contains('marluxia') && cell.classList.contains('riku')) {
+        rikuCollision()
       }
     })
   }, marluxiaSpeed)
