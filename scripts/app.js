@@ -72,15 +72,6 @@ function twoPlayerMode() {
   // Change inner text to '1 Player'
 }
 
-// Riku character movement
-function addRiku() {
-  cells[rikuCurrentPos].classList.add('riku')
-}
-
-function removeRiku() {
-  cells[rikuCurrentPos].classList.remove('riku')
-}
-
 function generateNamine() {
   // Identify end column
   const endCol = cells.filter(cell => parseInt(cell.id) % 10 === 9)
@@ -140,7 +131,7 @@ function generateGoofy() {
 }
 
 
-// Character movement
+// Sora character movement
 function addChar() {
   cells[currentPos].classList.add('char')
 }
@@ -149,50 +140,101 @@ function removeChar() {
   cells[currentPos].classList.remove('char')
 }
 
-// On keypress update character position
+// Riku character movement
+function addRiku() {
+  cells[rikuCurrentPos].classList.add('riku')
+}
+
+function removeRiku() {
+  cells[rikuCurrentPos].classList.remove('riku')
+}
+
+// On keypress, update character position for both characters
 function keyPress(evt) {
   const key = evt.code
-  const lastPos = currentPos
-  removeChar()
-  if (key === 'ArrowUp' && currentPos >= width) {
-    currentPos -= width
-  } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
-    currentPos += width
-  } else if (key === 'ArrowLeft' && currentPos % width !== 0) {
-    currentPos--
-  } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
-    currentPos++
-  }
-  // If moving into an enemy cell, invoke collision function
-  if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia')) {
-    collision()
-  // If trying to move into a pillar, send back to previous position
-  } else if (cells[currentPos].classList.contains('pillar')) {
+  if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
+    removeChar()
     if (key === 'ArrowUp' && currentPos >= width) {
-      currentPos += width
-    } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
       currentPos -= width
+    } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
+      currentPos += width
     } else if (key === 'ArrowLeft' && currentPos % width !== 0) {
-      currentPos++
-    } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
       currentPos--
+    } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
+      currentPos++
     }
-    addChar()
-  // If moving into Donald's or Goofy's cell, remove their class, increase score and add character
-  } else if (cells[currentPos].classList.contains('donald') || cells[currentPos].classList.contains('goofy')) {
-    cells[currentPos].classList.remove('donald')
-    cells[currentPos].classList.remove('goofy')
-    score += 500
-    scoreDisplay.innerText = score
-    addChar()
-  // If moving into Namine's cell, call the namine function
-  } else if (cells[currentPos].classList.contains('namine')) {
-    targetReached()
-  // Else character appears in new position as calculated after character was removed
-  } else {
-    addChar()
+    // If moving into an enemy cell, invoke collision function
+    if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia')) {
+      collision()
+    // If trying to move into a pillar, send back to previous position
+    } else if (cells[currentPos].classList.contains('pillar')) {
+      if (key === 'ArrowUp' && currentPos >= width) {
+        currentPos += width
+      } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
+        currentPos -= width
+      } else if (key === 'ArrowLeft' && currentPos % width !== 0) {
+        currentPos++
+      } else if (key === 'ArrowRight' && currentPos % width !== width - 1) {
+        currentPos--
+      }
+      addChar()
+    // If moving into Donald's or Goofy's cell, remove their class, increase score and add character
+    } else if (cells[currentPos].classList.contains('donald') || cells[currentPos].classList.contains('goofy')) {
+      cells[currentPos].classList.remove('donald')
+      cells[currentPos].classList.remove('goofy')
+      score += 500
+      scoreDisplay.innerText = score
+      addChar()
+    // If moving into Namine's cell, call the namine function
+    } else if (cells[currentPos].classList.contains('namine')) {
+      targetReached()
+    // Else character appears in new position as calculated after character was removed
+    } else {
+      addChar()
+    }
+  } else if (key === 'KeyW' || key === 'KeyS' || key === 'KeyA' || key === 'KeyD') {
+    removeRiku()
+    if (key === 'KeyW' && rikuCurrentPos >= width) {
+      rikuCurrentPos -= width
+    } else if (key === 'KeyS' && rikuCurrentPos + width < cells.length) {
+      rikuCurrentPos += width
+    } else if (key === 'KeyA' && rikuCurrentPos % width !== 0) {
+      rikuCurrentPos--
+    } else if (key === 'KeyD' && rikuCurrentPos % width !== width - 1) {
+      rikuCurrentPos++
+    }
+    // If moving into an enemy cell, invoke collision function
+    if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
+      collision()
+    // If trying to move into a pillar, send back to previous position
+    } else if (cells[rikuCurrentPos].classList.contains('pillar')) {
+      if (key === 'ArrowUp' && rikuCurrentPos >= width) {
+        rikuCurrentPos += width
+      } else if (key === 'ArrowDown' && rikuCurrentPos + width < cells.length) {
+        rikuCurrentPos -= width
+      } else if (key === 'ArrowLeft' && rikuCurrentPos % width !== 0) {
+        rikuCurrentPos++
+      } else if (key === 'ArrowRight' && rikuCurrentPos % width !== width - 1) {
+        rikuCurrentPos--
+      }
+      addRiku()
+    // If moving into Donald's or Goofy's cell, remove their class, increase score and add   character
+    } else if (cells[rikuCurrentPos].classList.contains('donald') || cells[rikuCurrentPos].classList.  contains('goofy')) {
+      cells[rikuCurrentPos].classList.remove('donald')
+      cells[rikuCurrentPos].classList.remove('goofy')
+      score += 500
+      scoreDisplay.innerText = score
+      addRiku()
+    // If moving into Namine's cell, call the namine function
+    } else if (cells[rikuCurrentPos].classList.contains('namine')) {
+      targetReached()
+    // Else character appears in new position as calculated after character was removed
+    } else {
+      addRiku()
+    }
   }
 }
+
 
 //! Enemy movement
 // Enemy movement column 1
