@@ -103,6 +103,14 @@ footer {
   -webkit-transform: scaleX(-1);
 }
 
+.game-grid div.riku {
+  background-image: url('../assets/riku.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+}
+
 .game-grid div.dark-figure {
   background-image: url('../assets/dark-figure.gif');
   background-repeat: no-repeat;

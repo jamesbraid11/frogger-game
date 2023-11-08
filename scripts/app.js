@@ -1,6 +1,6 @@
 
 //* Elements
-const startBtn = document.querySelector('.start-game')
+const twoPlayerBtn = document.querySelector('.two-player')
 const grid = document.querySelector('.game-grid')
 let cells = []
 let livesDisplay = document.querySelector('.lives-display')
@@ -14,8 +14,10 @@ const playAgainBtn = document.querySelector('.play-again')
 let lives = 3
 let score = 0
 // let gameActive = false
-const startPos = 50
+const startPos = 30
 let currentPos = startPos
+const rikuStartPos = 60
+let rikuCurrentPos = rikuStartPos
 const width = 10
 const cellCount = width * width
 let col1Interval
@@ -60,6 +62,24 @@ generatePillars()
 generateNamine()
 generateDonald()
 generateGoofy()
+
+function twoPlayerMode() {
+  // Add Riku to his starting position
+  addRiku()
+  // Remove two-player class from button
+  // twoPlayerBtn.classList.remove('two-player') - not removing class
+  // Add one-player class to button
+  // Change inner text to '1 Player'
+}
+
+// Riku character movement
+function addRiku() {
+  cells[rikuCurrentPos].classList.add('riku')
+}
+
+function removeRiku() {
+  cells[rikuCurrentPos].classList.remove('riku')
+}
 
 function generateNamine() {
   // Identify end column
@@ -390,6 +410,8 @@ function playAgain() {
 
 
 //* Events
+twoPlayerBtn.addEventListener('click', twoPlayerMode)
+
 playAgainBtn.addEventListener('click', playAgain)
 
 document.addEventListener('keydown', keyPress)
