@@ -341,6 +341,11 @@ function targetReached() {
   col8Movement()
   score += 1000
   scoreDisplay.innerText = score
+  cells.forEach(cell => {
+    cell.classList.remove('donald', 'goofy')
+  })
+  generateDonald()
+  generateGoofy()
   addChar(currentPos = startPos)
 }
 
@@ -365,6 +370,11 @@ function gameOver() {
   col5Movement()
   col7Movement()
   col8Movement()
+  cells.forEach(cell => {
+    cell.classList.remove('donald', 'goofy')
+  })
+  generateDonald()
+  generateGoofy()
   // Update high score display?
 }
 
