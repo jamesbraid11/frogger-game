@@ -4,15 +4,20 @@ const twoPlayerBtn = document.querySelector('.two-player')
 const grid = document.querySelector('.game-grid')
 let cells = []
 let livesDisplay = document.querySelector('.lives-display')
+let rikuLivesDisplay = document.querySelector('.riku-lives-display')
 let scoreDisplay = document.querySelector('.score-display')
-let highScoreDisplay = document.querySelector('.high-score-display')
+let rikuScoreDisplay = document.querySelector('.riku-score-display')
 let gameOverScreen = document.querySelector('.game-over')
 let finalScoreDisplay = document.querySelector('.final-score-display')
 const playAgainBtn = document.querySelector('.play-again')
 
+console.log(rikuLivesDisplay)
+
 //* Variables
 let lives = 3
 let score = 0
+let rikuLives = 3
+let rikuScore = 0
 // let gameActive = false
 const startPos = 30
 let currentPos = startPos
@@ -32,6 +37,7 @@ let larxeneSpeed = 450
 let marluxiaSpeed = 400
 
 scoreDisplay.innerText = score
+rikuScoreDisplay.innerText = rikuScore
 
 //* Executions
 // Grid creator function
@@ -205,7 +211,7 @@ function keyPress(evt) {
     }
     // If moving into an enemy cell, invoke collision function
     if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
-      collision()
+      rikuCollision()
     // If trying to move into a pillar, send back to previous position
     } else if (cells[rikuCurrentPos].classList.contains('pillar')) {
       if (key === 'ArrowUp' && rikuCurrentPos >= width) {
@@ -378,6 +384,9 @@ function collision() {
   livesDisplay.innerText = '💚'.repeat(lives)
   // Check for game over
   if (lives === 0) {
+    removeChar(currentPos)
+  }
+  if (lives === 0 && rikuLives === 0) {
     gameOver()
   }
 }
@@ -388,11 +397,14 @@ function rikuCollision() {
   removeRiku(rikuCurrentPos)
   addRiku(rikuCurrentPos = rikuStartPos)
   // Remove a life
-  lives -= 1
+  rikuLives -= 1
   // Update lives display
-  livesDisplay.innerText = '💚'.repeat(lives)
+  rikuLivesDisplay.innerText = '💜'.repeat(lives)
   // Check for game over
-  if (lives === 0) {
+  if (rikuLives === 0) {
+    removeRiku(rikuCurrentPos)
+  }
+  if (rikuLives === 0 && lives === 0) {
     gameOver()
   }
 }
