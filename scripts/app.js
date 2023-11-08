@@ -384,11 +384,11 @@ function collision() {
   livesDisplay.innerText = '💚'.repeat(lives)
   // Check for game over
   if (lives === 0) {
-    removeChar(currentPos)
-  }
-  if (lives === 0 && rikuLives === 0) {
     gameOver()
   }
+  // if (lives === 0 && rikuLives === 0) {
+  //   gameOver()
+  // }
 }
 
 // Collision function for Riku
@@ -399,14 +399,14 @@ function rikuCollision() {
   // Remove a life
   rikuLives -= 1
   // Update lives display
-  rikuLivesDisplay.innerText = '💜'.repeat(lives)
+  rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
   // Check for game over
   if (rikuLives === 0) {
-    removeRiku(rikuCurrentPos)
-  }
-  if (rikuLives === 0 && lives === 0) {
     gameOver()
   }
+  // if (rikuLives === 0 && lives === 0) {
+  //   gameOver()
+  // }
 }
 
 // What happens when reach/rescue Namine
