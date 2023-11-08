@@ -95,6 +95,10 @@ footer {
 
 }
 
+.riku-display {
+  display: none;
+}
+
 .riku-game-over {
   display: none;
 }

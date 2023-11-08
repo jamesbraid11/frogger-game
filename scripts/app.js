@@ -11,9 +11,9 @@ let gameOverScreen = document.querySelector('.game-over')
 let soraFinalScoreDisplay = document.querySelector('.sora-final-score-display')
 let rikuFinalScoreDisplay = document.querySelector('.riku-final-score-display')
 let rikuGameOverMsg = document.querySelector('.riku-game-over')
+let rikuDisplay = document.querySelectorAll('.riku-display')
 const playAgainBtn = document.querySelector('.play-again')
 
-console.log(rikuLivesDisplay)
 
 //* Variables
 let lives = 3
@@ -37,6 +37,8 @@ let darkFigureSpeed = 1000
 let lexaeusSpeed = 500
 let larxeneSpeed = 450
 let marluxiaSpeed = 400
+let stopAddChar = false
+let stopAddRiku = false
 
 scoreDisplay.innerText = score
 rikuScoreDisplay.innerText = rikuScore
@@ -76,6 +78,10 @@ generateGoofy()
 function twoPlayerMode() {
   // Add Riku to his starting position
   addRiku()
+  // Unhide riku score and lives displays
+  rikuDisplay.forEach(element => {
+    element.style.display = 'block'
+  })
   // Unhide riku final score display
   rikuGameOverMsg.style.display = 'block'
   // Hide two player button
@@ -144,7 +150,11 @@ function generateGoofy() {
 
 // Add and remove Sora functions
 function addChar() {
-  cells[currentPos].classList.add('char')
+  if (stopAddChar) {
+    return
+  } else {
+    cells[currentPos].classList.add('char')
+  }
 }
 
 function removeChar() {
@@ -153,7 +163,11 @@ function removeChar() {
 
 // Add and remove Riku functions
 function addRiku() {
-  cells[rikuCurrentPos].classList.add('riku')
+  if (stopAddRiku) {
+    return
+  } else {
+    cells[rikuCurrentPos].classList.add('riku')
+  }
 }
 
 function removeRiku() {
@@ -401,7 +415,7 @@ function col8Movement() {
 // Collision function for Sora
 function collision() {
   // Move Sora back to start position
-  removeChar(currentPos)
+  removeChar()
   addChar(currentPos = startPos)
   // Remove a life
   lives -= 1
@@ -419,7 +433,7 @@ function collision() {
 // Collision function for Riku
 function rikuCollision() {
   // Move Riku back to start position
-  removeRiku(rikuCurrentPos)
+  removeRiku()
   addRiku(rikuCurrentPos = rikuStartPos)
   // Remove a life
   rikuLives -= 1
@@ -427,7 +441,7 @@ function rikuCollision() {
   rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
   // Check for game over
   if (rikuLives === 0) {
-    gameOver()
+    removeRiku()
   }
   // if (rikuLives === 0 && lives === 0) {
   //   gameOver()
@@ -436,8 +450,8 @@ function rikuCollision() {
 
 // What happens when Sora reaches Namine
 function targetReached() {
-  removeChar(currentPos)
-  removeRiku(rikuCurrentPos)
+  removeChar()
+  removeRiku()
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -463,13 +477,17 @@ function targetReached() {
   generateGoofy()
   generateNamine()
   addChar(currentPos = startPos)
-  addRiku(rikuCurrentPos = rikuStartPos)
+  cells.forEach(cell => {
+    if (cell.classList.contains('riku')) {
+      addRiku(rikuCurrentPos = rikuStartPos)
+    }
+  })
 }
 
 // What happens when Riku reaches Namine
 function rikuTargetReached() {
-  removeRiku(rikuCurrentPos)
-  removeChar(currentPos)
+  removeRiku()
+  removeChar()
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -503,8 +521,8 @@ function gameOver() {
   gameOverScreen.style.display = 'block'
   soraFinalScoreDisplay.innerText = score
   rikuFinalScoreDisplay.innerText = rikuScore
-  removeChar(currentPos)
-  removeRiku(rikuCurrentPos)
+  removeChar()
+  removeRiku()
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -537,12 +555,14 @@ function playAgain() {
   rikuLives = 3
   livesDisplay.innerText = '💚'.repeat(lives)
   rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
+
   score = 0
   rikuScore = 0
   scoreDisplay.innerText = score
   rikuScoreDisplay.innerText = rikuScore
   addChar(currentPos = startPos)
-  addRiku(rikuCurrentPos = rikuStartPos)
+  twoPlayerBtn.style.display = 'block'
+  rikuDisplay.style.display = 'none'
 }
 
 
