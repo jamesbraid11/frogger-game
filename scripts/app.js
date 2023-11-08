@@ -104,8 +104,7 @@ function generateDonald() {
   // Assign donald class to a random cell from third column that does not have the pillar class
   while (true) {
     // Select a random cell from third column
-    let randomIndex = Math.floor(Math.random() * thirdCol.length)
-    let randomCell = thirdCol[randomIndex]
+    let randomCell = thirdCol[Math.floor(Math.random() * thirdCol.length)]
     // If class of random cell does not contain pillar, add Donald there and break loop, otherwise loop again
     if (!randomCell.classList.contains('pillar')) {
       randomCell.classList.add('donald')
@@ -120,8 +119,7 @@ function generateGoofy() {
   // Assign goofy class to a random cell from third column that does not have the pillar class
   while (true) {
     // Select a random cell from third column
-    let randomIndex = Math.floor(Math.random() * sixthCol.length)
-    let randomCell = sixthCol[randomIndex]
+    let randomCell = sixthCol[Math.floor(Math.random() * sixthCol.length)]
     // If class of random cell does not contain pillar, add goofy there and break loop, otherwise loop again
     if (!randomCell.classList.contains('pillar')) {
       randomCell.classList.add('goofy')
@@ -131,7 +129,7 @@ function generateGoofy() {
 }
 
 
-// Sora character movement
+// Add and remove Sora functions
 function addChar() {
   cells[currentPos].classList.add('char')
 }
@@ -140,7 +138,7 @@ function removeChar() {
   cells[currentPos].classList.remove('char')
 }
 
-// Riku character movement
+// Add and remove Riku functions
 function addRiku() {
   cells[rikuCurrentPos].classList.add('riku')
 }
@@ -152,6 +150,7 @@ function removeRiku() {
 // On keypress, update character position for both characters
 function keyPress(evt) {
   const key = evt.code
+  // Define movement for Sora
   if (key === 'ArrowUp' || key === 'ArrowDown' || key === 'ArrowLeft' || key === 'ArrowRight') {
     removeChar()
     if (key === 'ArrowUp' && currentPos >= width) {
@@ -192,6 +191,7 @@ function keyPress(evt) {
     } else {
       addChar()
     }
+  // Define movement for Riku
   } else if (key === 'KeyW' || key === 'KeyS' || key === 'KeyA' || key === 'KeyD') {
     removeRiku()
     if (key === 'KeyW' && rikuCurrentPos >= width) {
@@ -367,11 +367,26 @@ function col8Movement() {
 }
 
 
-// Collision function
+// Collision function for Sora
 function collision() {
-  // Move character back to start position
+  // Move Sora back to start position
   removeChar(currentPos)
   addChar(currentPos = startPos)
+  // Remove a life
+  lives -= 1
+  // Update lives display
+  livesDisplay.innerText = '💚'.repeat(lives)
+  // Check for game over
+  if (lives === 0) {
+    gameOver()
+  }
+}
+
+// Collision function for Riku
+function rikuCollision() {
+  // Move Riku back to start position
+  removeRiku(rikuCurrentPos)
+  addRiku(rikuCurrentPos = rikuStartPos)
   // Remove a life
   lives -= 1
   // Update lives display
