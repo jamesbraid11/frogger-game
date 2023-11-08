@@ -18,6 +18,12 @@ const startPos = 50
 let currentPos = startPos
 const width = 10
 const cellCount = width * width
+let col1Interval
+let col2Interval
+let col4Interval
+let col5Interval
+let col7Interval
+let col8Interval
 let darkFigureSpeed = 1000
 let lexaeusSpeed = 500
 let larxeneSpeed = 450
@@ -118,6 +124,9 @@ function keyPress(evt) {
       currentPos--
     }
     addChar()
+  // If moving into Namine's cell, call the namine function
+  } else if (cells[currentPos].classList.contains('namine')) {
+    targetReached()
   // Else character appears in new position as calculated after character was removed
   } else {
     addChar()
@@ -155,7 +164,7 @@ const enemyCol2 = cells.filter(cell => parseInt(cell.id) % 10 === 2)
 const col2Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'lexaeus']
 
 function col2Movement() {
-  setInterval(() => {
+  col2Interval = setInterval(() => {
     enemyCol2.forEach(cell => {
       cell.classList.remove('blank', 'lexaeus')
     })
@@ -176,7 +185,7 @@ const enemyCol4 = cells.filter(cell => parseInt(cell.id) % 10 === 4)
 const col4Classes = ['dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure']
 
 function col4Movement() {
-  setInterval(() => {
+  col4Interval = setInterval(() => {
     enemyCol4.forEach(cell => {
       cell.classList.remove('blank', 'dark-figure')
     })
@@ -197,7 +206,7 @@ const enemyCol5 = cells.filter(cell => parseInt(cell.id) % 10 === 5)
 const col5Classes = ['larxene', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
 
 function col5Movement() {
-  setInterval(() => {
+  col5Interval = setInterval(() => {
     enemyCol5.forEach(cell => {
       cell.classList.remove('blank', 'larxene')
     })
@@ -218,7 +227,7 @@ const enemyCol7 = cells.filter(cell => parseInt(cell.id) % 10 === 7)
 const col7Classes = ['dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank', 'dark-figure', 'dark-figure', 'blank', 'dark-figure', 'blank']
 
 function col7Movement() {
-  setInterval(() => {
+  col7Interval = setInterval(() => {
     enemyCol7.forEach(cell => {
       cell.classList.remove('blank', 'dark-figure')
     })
@@ -239,7 +248,7 @@ const enemyCol8 = cells.filter(cell => parseInt(cell.id) % 10 === 8)
 const col8Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'marluxia']
 
 function col8Movement() {
-  setInterval(() => {
+  col8Interval = setInterval(() => {
     enemyCol8.forEach(cell => {
       cell.classList.remove('blank', 'marluxia')
     })
@@ -270,16 +279,51 @@ function collision() {
   }
 }
 
+// What happens when reach/rescue Namine
+function targetReached() {
+  removeChar(currentPos)
+  clearInterval(col1Interval)
+  clearInterval(col2Interval)
+  clearInterval(col4Interval)
+  clearInterval(col5Interval)
+  clearInterval(col7Interval)
+  clearInterval(col8Interval)
+  darkFigureSpeed -= 100
+  lexaeusSpeed -= 50
+  larxeneSpeed -= 50
+  marluxiaSpeed -= 50
+  col1Movement()
+  col2Movement()
+  col4Movement()
+  col5Movement()
+  col7Movement()
+  col8Movement()
+  score += 1000
+  scoreDisplay.innerText = score
+  addChar(currentPos = startPos)
+}
 
 // Game over function
 function gameOver() {
   gameOverScreen.style.display = 'block'
   finalScoreDisplay.innerText = score
-  addChar(currentPos = startPos)
+  removeChar(currentPos)
+  clearInterval(col1Interval)
+  clearInterval(col2Interval)
+  clearInterval(col4Interval)
+  clearInterval(col5Interval)
+  clearInterval(col7Interval)
+  clearInterval(col8Interval)
   darkFigureSpeed = 1000
   lexaeusSpeed = 500
   larxeneSpeed = 450
   marluxiaSpeed = 400
+  col1Movement()
+  col2Movement()
+  col4Movement()
+  col5Movement()
+  col7Movement()
+  col8Movement()
   // Update high score display?
 }
 
@@ -290,6 +334,7 @@ function playAgain() {
   livesDisplay.innerText = '💚'.repeat(lives)
   score = 0
   scoreDisplay.innerText = score
+  addChar(currentPos = startPos)
 }
 
 

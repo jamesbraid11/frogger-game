@@ -129,7 +129,6 @@ footer {
 
 .game-grid div.pillar {
   background-image: url('../assets/pillar.png');
-  background-repeat: no-repeat;
   background-size: contain;
 }
 
