@@ -224,16 +224,16 @@ function keyPress(evt) {
         rikuCurrentPos--
       }
       addRiku()
-    // If moving into Donald's or Goofy's cell, remove their class, increase score and add   character
-    } else if (cells[rikuCurrentPos].classList.contains('donald') || cells[rikuCurrentPos].classList.  contains('goofy')) {
+    // If moving into Donald's or Goofy's cell, remove their class, increase score and add  character
+    } else if (cells[rikuCurrentPos].classList.contains('donald') || cells[rikuCurrentPos].classList.contains('goofy')) {
       cells[rikuCurrentPos].classList.remove('donald')
       cells[rikuCurrentPos].classList.remove('goofy')
-      score += 500
-      scoreDisplay.innerText = score
+      rikuScore += 500
+      rikuScoreDisplay.innerText = rikuScore
       addRiku()
     // If moving into Namine's cell, call the namine function
     } else if (cells[rikuCurrentPos].classList.contains('namine')) {
-      targetReached()
+      rikuTargetReached()
     // Else character appears in new position as calculated after character was removed
     } else {
       addRiku()
@@ -409,9 +409,10 @@ function rikuCollision() {
   // }
 }
 
-// What happens when reach/rescue Namine
+// What happens when Sora reaches Namine
 function targetReached() {
   removeChar(currentPos)
+  removeRiku(rikuCurrentPos)
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -431,10 +432,44 @@ function targetReached() {
   score += 1000
   scoreDisplay.innerText = score
   cells.forEach(cell => {
-    cell.classList.remove('donald', 'goofy')
+    cell.classList.remove('donald', 'goofy', 'namine')
   })
   generateDonald()
   generateGoofy()
+  generateNamine()
+  addChar(currentPos = startPos)
+  addRiku(rikuCurrentPos = rikuStartPos)
+}
+
+// What happens when Riku reaches Namine
+function rikuTargetReached() {
+  removeRiku(rikuCurrentPos)
+  removeChar(currentPos)
+  clearInterval(col1Interval)
+  clearInterval(col2Interval)
+  clearInterval(col4Interval)
+  clearInterval(col5Interval)
+  clearInterval(col7Interval)
+  clearInterval(col8Interval)
+  darkFigureSpeed -= 100
+  lexaeusSpeed -= 50
+  larxeneSpeed -= 50
+  marluxiaSpeed -= 50
+  col1Movement()
+  col2Movement()
+  col4Movement()
+  col5Movement()
+  col7Movement()
+  col8Movement()
+  rikuScore += 1000
+  rikuScoreDisplay.innerText = rikuScore
+  cells.forEach(cell => {
+    cell.classList.remove('donald', 'goofy', 'namine')
+  })
+  generateDonald()
+  generateGoofy()
+  generateNamine()
+  addRiku(rikuCurrentPos = rikuStartPos)
   addChar(currentPos = startPos)
 }
 
