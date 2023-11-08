@@ -158,6 +158,13 @@ function keyPress(evt) {
       currentPos--
     }
     addChar()
+  // If moving into Donald's or Goofy's cell, remove their class, increase score and add character
+  } else if (cells[currentPos].classList.contains('donald') || cells[currentPos].classList.contains('goofy')) {
+    cells[currentPos].classList.remove('donald')
+    cells[currentPos].classList.remove('goofy')
+    score += 500
+    scoreDisplay.innerText = score
+    addChar()
   // If moving into Namine's cell, call the namine function
   } else if (cells[currentPos].classList.contains('namine')) {
     targetReached()
