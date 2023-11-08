@@ -137,3 +137,15 @@ footer {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.game-grid div.donald {
+  background-image: url('../assets/donald.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.game-grid div.goofy {
+  background-image: url('../assets/goofy.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}

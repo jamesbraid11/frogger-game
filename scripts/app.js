@@ -56,8 +56,10 @@ col4Movement()
 col5Movement()
 col7Movement()
 col8Movement()
-generateNamine()
 generatePillars()
+generateNamine()
+generateDonald()
+generateGoofy()
 
 function generateNamine() {
   // Identify end column
@@ -83,6 +85,38 @@ function generatePillars() {
   sixthCol[4].classList.add('pillar')
   sixthCol[6].classList.add('pillar')
   sixthCol[8].classList.add('pillar')
+}
+
+function generateDonald() {
+  // Identify third column
+  const thirdCol = cells.filter(cell => parseInt(cell.id) % 10 === 3)
+  // Assign donald class to a random cell from third column that does not have the pillar class
+  while (true) {
+    // Select a random cell from third column
+    let randomIndex = Math.floor(Math.random() * thirdCol.length)
+    let randomCell = thirdCol[randomIndex]
+    // If class of random cell does not contain pillar, add Donald there and break loop, otherwise loop again
+    if (!randomCell.classList.contains('pillar')) {
+      randomCell.classList.add('donald')
+      break
+    }
+  }
+}
+
+function generateGoofy() {
+  // Identify sixth column
+  const sixthCol = cells.filter(cell => parseInt(cell.id) % 10 === 6)
+  // Assign goofy class to a random cell from third column that does not have the pillar class
+  while (true) {
+    // Select a random cell from third column
+    let randomIndex = Math.floor(Math.random() * sixthCol.length)
+    let randomCell = sixthCol[randomIndex]
+    // If class of random cell does not contain pillar, add goofy there and break loop, otherwise loop again
+    if (!randomCell.classList.contains('pillar')) {
+      randomCell.classList.add('goofy')
+      break
+    }
+  }
 }
 
 
