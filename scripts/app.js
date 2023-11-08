@@ -13,7 +13,7 @@ const playAgainBtn = document.querySelector('.play-again')
 //* Variables
 let lives = 3
 let score = 0
-let gameActive = false
+// let gameActive = false
 const startPos = 50
 let currentPos = startPos
 const width = 10
