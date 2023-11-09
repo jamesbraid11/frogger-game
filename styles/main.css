@@ -7,7 +7,7 @@ body {
   height: 100vh;
   font-family: 'Orbitron', sans-serif;
   font-size: 14px;
-  background-image: url('../assets/small-tiled-background-red.jpeg');
+  background-image: url('../assets/blue-tiled-background.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -111,7 +111,7 @@ button.two-player {
   transform: translate(-50%, -50%);
   height: 81vh;
   width: 58vw;
-  /* display: none; */
+  display: none;
   margin-top: 5vh;
   border: 5px solid;
   border-radius: 20px;
@@ -132,7 +132,7 @@ h2 {
 }
 
 p.left {
-  margin: 10px auto;
+  margin: 5px auto;
 }
 
 div.arrows {
@@ -200,6 +200,11 @@ h4 {
 
 .riku-game-over {
   display: none;
+}
+
+.copyright {
+  color: white;
+  text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
 }
 
 .game-grid div.char {
