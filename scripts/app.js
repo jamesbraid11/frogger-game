@@ -37,10 +37,8 @@ let darkFigureSpeed = 1000
 let lexaeusSpeed = 500
 let larxeneSpeed = 450
 let marluxiaSpeed = 400
-let stopAddChar = false
-let stopAddRiku = false
 let stopCharMovement = false
-let stopRikuMovement = false
+let stopRikuMovement = true
 
 scoreDisplay.innerText = score
 rikuScoreDisplay.innerText = rikuScore
@@ -80,6 +78,8 @@ generateGoofy()
 function twoPlayerMode() {
   // Add Riku to his starting position
   addRiku()
+  // Enable user to control Riku
+  stopRikuMovement = false
   // Unhide riku score and lives displays
   rikuDisplay.forEach(element => {
     element.style.display = 'block'
@@ -152,11 +152,7 @@ function generateGoofy() {
 
 // Add and remove Sora functions
 function addChar() {
-  if (stopAddChar) {
-    return
-  } else {
-    cells[currentPos].classList.add('char')
-  }
+  cells[currentPos].classList.add('char')
 }
 
 function removeChar() {
@@ -165,11 +161,7 @@ function removeChar() {
 
 // Add and remove Riku functions
 function addRiku() {
-  if (stopAddRiku) {
-    return
-  } else {
-    cells[rikuCurrentPos].classList.add('riku')
-  }
+  cells[rikuCurrentPos].classList.add('riku')
 }
 
 function removeRiku() {
