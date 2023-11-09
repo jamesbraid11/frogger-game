@@ -189,8 +189,8 @@ function keyPress(evt) {
       // If moving into an enemy cell, invoke collision function
       if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].  classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') ||   cells[currentPos].classList.contains('marluxia')) {
         collision()
-      // If trying to move into a pillar, send back to previous position
-      } else if (cells[currentPos].classList.contains('pillar')) {
+      // If trying to move into a pillar or player 2's cell, send back to previous position
+      } else if (cells[currentPos].classList.contains('pillar') || cells[currentPos].classList.contains('riku')) {
         if (key === 'ArrowUp' && currentPos >= width) {
           currentPos += width
         } else if (key === 'ArrowDown' && currentPos + width < cells.length) {
@@ -232,17 +232,17 @@ function keyPress(evt) {
         rikuCurrentPos++
       }
       // If moving into an enemy cell, invoke collision function
-      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].  classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains  ('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
+      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].  classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
         rikuCollision()
-      // If trying to move into a pillar, send back to previous position
-      } else if (cells[rikuCurrentPos].classList.contains('pillar')) {
-        if (key === 'ArrowUp' && rikuCurrentPos >= width) {
+      // If trying to move into a pillar or player 1's cell, send back to previous position
+      } else if (cells[rikuCurrentPos].classList.contains('pillar') || cells[rikuCurrentPos].classList.contains('char')) {
+        if (key === 'KeyW' && rikuCurrentPos >= width) {
           rikuCurrentPos += width
-        } else if (key === 'ArrowDown' && rikuCurrentPos + width < cells.length) {
+        } else if (key === 'KeyS' && rikuCurrentPos + width < cells.length) {
           rikuCurrentPos -= width
-        } else if (key === 'ArrowLeft' && rikuCurrentPos % width !== 0) {
+        } else if (key === 'KeyA' && rikuCurrentPos % width !== 0) {
           rikuCurrentPos++
-        } else if (key === 'ArrowRight' && rikuCurrentPos % width !== width - 1) {
+        } else if (key === 'KeyD' && rikuCurrentPos % width !== width - 1) {
           rikuCurrentPos--
         }
         addRiku()
