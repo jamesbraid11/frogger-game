@@ -19,6 +19,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 main {
@@ -36,7 +37,7 @@ h1 {
   color: white;
   font-size: 3.5em;
   text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
-  margin: 20px 
+  margin: 0;
 }
 
 button.two-player {
@@ -73,7 +74,7 @@ button.two-player {
 .container {
   background-color: white;
   width:  80%;
-  height: 60vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -107,7 +108,7 @@ button.two-player {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 81vh;
+  height: 80vh;
   width: 58vw;
   display: none;
   margin-top: 5vh;
@@ -134,8 +135,8 @@ p.left {
 }
 
 div.arrows {
-  height: 5vh;
-  width: 7vh;
+  height: 4em;
+  width: 6em;
   background-image: url('../assets/arrows.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -143,8 +144,8 @@ div.arrows {
 }
 
 div.wasd {
-  height: 5vh;
-  width: 7vh;
+  height: 4em;
+  width: 6em;
   background-image: url('../assets/wasd.png');
   background-repeat: no-repeat;
   background-size: cover;

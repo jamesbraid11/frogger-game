@@ -14,6 +14,7 @@ let rikuGameOverMsg = document.querySelector('.riku-game-over')
 let rikuDisplay = document.querySelectorAll('.riku-display')
 const playAgainBtn = document.querySelector('.play-again')
 
+const audio = document.createElement('audio')
 
 //* Variables
 let lives = 3
@@ -39,6 +40,8 @@ let larxeneSpeed = 450
 let marluxiaSpeed = 400
 let stopCharMovement = false
 let stopRikuMovement = true
+let stopAddChar = false
+let stopAddRiku = false
 
 scoreDisplay.innerText = score
 rikuScoreDisplay.innerText = rikuScore
@@ -77,7 +80,11 @@ generateNamine()
 generateDonald()
 generateGoofy()
 
+
 function twoPlayerMode() {
+  // Play entrance audio
+  audio.src = 'audio/riku-my-turn.wav'
+  audio.play()
   // Add Riku to his starting position
   addRiku()
   // Enable user to control Riku
@@ -154,7 +161,11 @@ function generateGoofy() {
 
 // Add and remove Sora functions
 function addChar() {
-  cells[currentPos].classList.add('char')
+  if (stopAddChar) {
+    return
+  } else {
+    cells[currentPos].classList.add('char')
+  }
 }
 
 function removeChar() {
@@ -163,7 +174,11 @@ function removeChar() {
 
 // Add and remove Riku functions
 function addRiku() {
-  cells[rikuCurrentPos].classList.add('riku')
+  if (stopAddRiku) {
+    return
+  } else {
+    cells[rikuCurrentPos].classList.add('riku')
+  }
 }
 
 function removeRiku() {
@@ -189,7 +204,7 @@ function keyPress(evt) {
         currentPos++
       }
       // If moving into an enemy cell, invoke collision function
-      if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].  classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') ||   cells[currentPos].classList.contains('marluxia')) {
+      if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia')) {
         collision()
       // If trying to move into a pillar or player 2's cell, send back to previous position
       } else if (cells[currentPos].classList.contains('pillar') || cells[currentPos].classList.contains('riku')) {
@@ -204,8 +219,16 @@ function keyPress(evt) {
         }
         addChar()
       // If moving into Donald's or Goofy's cell, remove their class, increase score and   add character
-      } else if (cells[currentPos].classList.contains('donald') || cells[currentPos].  classList.contains('goofy')) {
+      } else if (cells[currentPos].classList.contains('donald')) {
+        audio.src = 'audio/donald-help.wav'
+        audio.play()
         cells[currentPos].classList.remove('donald')
+        score += 500
+        scoreDisplay.innerText = score
+        addChar()
+      } else if (cells[currentPos].classList.contains('goofy')) {
+        audio.src = 'audio/goofy-hyuck.wav'
+        audio.play()
         cells[currentPos].classList.remove('goofy')
         score += 500
         scoreDisplay.innerText = score
@@ -234,7 +257,7 @@ function keyPress(evt) {
         rikuCurrentPos++
       }
       // If moving into an enemy cell, invoke collision function
-      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].  classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
+      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
         rikuCollision()
       // If trying to move into a pillar or player 1's cell, send back to previous position
       } else if (cells[rikuCurrentPos].classList.contains('pillar') || cells[rikuCurrentPos].classList.contains('char')) {
@@ -248,9 +271,17 @@ function keyPress(evt) {
           rikuCurrentPos--
         }
         addRiku()
-      // If moving into Donald's or Goofy's cell, remove their class, increase score and   add  character
-      } else if (cells[rikuCurrentPos].classList.contains('donald') || cells  [rikuCurrentPos].classList.contains('goofy')) {
+      // If moving into Donald's or Goofy's cell, remove their class, increase score and  add  character
+      } else if (cells[rikuCurrentPos].classList.contains('donald')) {
+        audio.src = 'audio/donald-help.wav'
+        audio.play()
         cells[rikuCurrentPos].classList.remove('donald')
+        rikuScore += 500
+        rikuScoreDisplay.innerText = rikuScore
+        addRiku()
+      } else if (cells[rikuCurrentPos].classList.contains('goofy')) {
+        audio.src = 'audio/goofy-hyuck.wav'
+        audio.play()
         cells[rikuCurrentPos].classList.remove('goofy')
         rikuScore += 500
         rikuScoreDisplay.innerText = rikuScore
@@ -258,7 +289,7 @@ function keyPress(evt) {
       // If moving into Namine's cell, call the namine function
       } else if (cells[rikuCurrentPos].classList.contains('namine')) {
         rikuTargetReached()
-      // Else character appears in new position as calculated after character was removed
+      // Else character appears in new position as calculated after character was initially removed
       } else {
         addRiku()
       }
@@ -420,6 +451,9 @@ function col8Movement() {
 function collision() {
   // Move Sora back to start position
   removeChar()
+  // Play dismayed audio
+  audio.src = 'audio/sora-aah.wav'
+  audio.play()
   // Remove a life
   lives -= 1
   // Update lives display
@@ -428,21 +462,30 @@ function collision() {
   cells.forEach(cell => {
     if (cell.classList.contains('riku')) {
       if (lives === 0 && rikuLives === 0) {
+        audio.src = 'audio/sora-no-lives.wav'
+        audio.play()
         gameOver()
       }
     }
   })
 
   if (cells.findIndex(cell => cell.classList.contains('riku')) === -1 && lives === 0) {
+    audio.src = 'audio/sora-no-lives.wav'
+    audio.play()
     gameOver()
   }
   
   if (lives === 0) {
+    audio.src = 'audio/sora-no-lives.wav'
+    audio.play()
     removeChar()
     stopCharMovement = true
+    stopAddChar = true
   }
+  stopCharMovement = true
   setTimeout(function(){
     addChar(currentPos = startPos)
+    stopCharMovement = false
   }, 1000)
 }
 
@@ -450,26 +493,40 @@ function collision() {
 function rikuCollision() {
   // Move Riku back to start position
   removeRiku()
+  // Play dismayed audio
+  audio.src = 'audio/riku-aah.wav'
+  audio.play()
   // Remove a life
   rikuLives -= 1
   // Update lives display
   rikuLivesDisplay.innerText = rikuLives > 0 ? '💜'.repeat(rikuLives) : '🤍'
   // Check for game over
   if (rikuLives === 0 && lives === 0) {
+    audio.src = 'audio/riku-not-yet.wav'
+    audio.play()
     gameOver()
   }
 
   if (rikuLives === 0) {
+    audio.src = 'audio/riku-not-yet.wav'
+    audio.play()
     removeRiku()
     stopRikuMovement = true
+    stopAddRiku = true
   }
+
+  stopRikuMovement = true
   setTimeout(function(){
     addRiku(rikuCurrentPos = rikuStartPos)
+    stopRikuMovement = false
   }, 1000)
 }
 
 // What happens when Sora reaches Namine
 function targetReached() {
+  // Play victorious player 1 audio
+  audio.src = 'audio/sora-lets-go.wav'
+  audio.play()
   removeChar()
   removeRiku()
   clearInterval(col1Interval)
@@ -506,6 +563,9 @@ function targetReached() {
 
 // What happens when Riku reaches Namine
 function rikuTargetReached() {
+  // Play victorious player 2 audio
+  audio.src = 'audio/riku-come-on.wav'
+  audio.play()
   removeRiku()
   removeChar()
   clearInterval(col1Interval)
@@ -581,7 +641,9 @@ function playAgain() {
   rikuScoreDisplay.innerText = rikuScore
 
   stopCharMovement = false
-  stopRikuMovement = false
+  stopRikuMovement = true
+  stopAddChar = false
+  stopAddRiku = false
 
   addChar(currentPos = startPos)
   twoPlayerBtn.style.display = 'block'
