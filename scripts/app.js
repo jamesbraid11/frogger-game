@@ -420,7 +420,6 @@ function col8Movement() {
 function collision() {
   // Move Sora back to start position
   removeChar()
-  addChar(currentPos = startPos)
   // Remove a life
   lives -= 1
   // Update lives display
@@ -442,13 +441,15 @@ function collision() {
     removeChar()
     stopCharMovement = true
   }
+  setTimeout(function(){
+    addChar(currentPos = startPos)
+  }, 1000)
 }
 
 // Collision function for Riku
 function rikuCollision() {
   // Move Riku back to start position
   removeRiku()
-  addRiku(rikuCurrentPos = rikuStartPos)
   // Remove a life
   rikuLives -= 1
   // Update lives display
@@ -462,6 +463,9 @@ function rikuCollision() {
     removeRiku()
     stopRikuMovement = true
   }
+  setTimeout(function(){
+    addRiku(rikuCurrentPos = rikuStartPos)
+  }, 1000)
 }
 
 // What happens when Sora reaches Namine
