@@ -6,6 +6,9 @@
   <title>KH Frogger</title>
   <link rel="stylesheet" href="styles/main.css">
   <script defer src="scripts/app.js" charset="utf-8"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 </head>
 <body>
   
@@ -17,10 +20,17 @@
   <main>
     <section class="blurb-and-rules">
       <div class="container">
-        <p class="left">Rescue Kairi from Organisation XIII!</p>
+        <div class="blurb">
+          <p class="left">Avoid Organisation XIII and their minions to rescue Naminé!</p>
+          <p class="left">Rendez-vous with Donald and Goofy to gain bonus points.</p>
+          <p class="left">Rescue Naminé repeatedly to increase your score. But watch out! Enemies'   speed will increase each time!</p>
+        </div>
         <div class="how-to-play">
-          <h2>How to Play</h2>
-          <p class="left">Move Sora using the arrow keys.</p>
+          <h2>Controls</h2>
+          <p class="left">Sora:</p>
+          <div class="arrows"></div>
+          <p class="left">Riku:</p>
+          <div class="wasd"></div>
         </div>
       </div>
     </section>
@@ -31,13 +41,13 @@
 
     <section class="scores-and-lives">
       <div class="container">
-        <div class="lives">
-          <h3>Sora Lives:</h3>
-          <p class="lives-display">💚💚💚</p>
-          <h3>Sora Score:<br><span class="score-display"></span></h3>
-          <h3 class="riku-display">Riku Lives:</h3>
-          <p class="riku-display riku-lives-display">💜💜💜</p>
-          <h3 class="riku-display">Riku Score:<br><span class="riku-score-display"></span></h3>
+        <div class="sora">
+          <h3 class="right">Sora Lives:<br><span class="lives-display">💚💚💚</span></h3>
+          <h3 class="right">Sora Score:<br><span class="score-display"></span></h3>
+        </div>
+        <div class="riku">
+          <h3 class="right riku-display">Riku Lives:<br><span class="riku-lives-display">💜💜💜</span></h3>
+          <h3 class="right riku-display">Riku Score:<br><span class="riku-score-display"></span></h3>
         </div>
       </div>
     </section>
