@@ -54,6 +54,8 @@ function createGrid() {
     cell.id = i
     // Set width and height of the div cells
     cell.style.width = `${100 / width}%`
+    cell.style.backgroundColor = 'white'
+    cell.style.color = 'rgba(0,0,0,0)'
     grid.append(cell)
     cells.push(cell)
   }
@@ -422,7 +424,7 @@ function collision() {
   // Remove a life
   lives -= 1
   // Update lives display
-  livesDisplay.innerText = '💚'.repeat(lives)
+  livesDisplay.innerText = lives > 0 ? '💚'.repeat(lives) : '🤍'
   // Check for game over
   cells.forEach(cell => {
     if (cell.classList.contains('riku')) {
@@ -450,7 +452,7 @@ function rikuCollision() {
   // Remove a life
   rikuLives -= 1
   // Update lives display
-  rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
+  rikuLivesDisplay.innerText = rikuLives > 0 ? '💜'.repeat(rikuLives) : '🤍'
   // Check for game over
   if (rikuLives === 0 && lives === 0) {
     gameOver()
