@@ -422,12 +422,22 @@ function collision() {
   // Update lives display
   livesDisplay.innerText = '💚'.repeat(lives)
   // Check for game over
-  if (lives === 0) {
+  cells.forEach(cell => {
+    if (cell.classList.contains('riku')) {
+      if (lives === 0 && rikuLives === 0) {
+        gameOver()
+      }
+    }
+  })
+
+  if (cells.findIndex(cell => cell.classList.contains('riku')) === -1 && lives === 0) {
     gameOver()
   }
-  // if (lives === 0 && rikuLives === 0) {
-  //   gameOver()
-  // }
+  
+  if (lives === 0) {
+    removeChar()
+    stopAddChar = true
+  }
 }
 
 // Collision function for Riku
@@ -440,12 +450,14 @@ function rikuCollision() {
   // Update lives display
   rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
   // Check for game over
+  if (rikuLives === 0 && lives === 0) {
+    gameOver()
+  }
+
   if (rikuLives === 0) {
     removeRiku()
+    stopAddRiku = true
   }
-  // if (rikuLives === 0 && lives === 0) {
-  //   gameOver()
-  // }
 }
 
 // What happens when Sora reaches Namine
@@ -555,14 +567,19 @@ function playAgain() {
   rikuLives = 3
   livesDisplay.innerText = '💚'.repeat(lives)
   rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
-
   score = 0
   rikuScore = 0
   scoreDisplay.innerText = score
   rikuScoreDisplay.innerText = rikuScore
+
+  stopAddChar = false
+  stopAddRiku = false
+
   addChar(currentPos = startPos)
   twoPlayerBtn.style.display = 'block'
-  rikuDisplay.style.display = 'none'
+  rikuDisplay.forEach(element => {
+    element.style.display = 'none'
+  })
 }
 
 
