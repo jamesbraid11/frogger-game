@@ -13,15 +13,14 @@ let rikuFinalScoreDisplay = document.querySelector('.riku-final-score-display')
 let rikuGameOverMsg = document.querySelector('.riku-game-over')
 let rikuDisplay = document.querySelectorAll('.riku-display')
 const playAgainBtn = document.querySelector('.play-again')
-
 const audio = document.createElement('audio')
+
 
 //* Variables
 let lives = 3
 let score = 0
 let rikuLives = 3
 let rikuScore = 0
-// let gameActive = false
 const startPos = 30
 let currentPos = startPos
 const rikuStartPos = 60
@@ -47,6 +46,8 @@ scoreDisplay.innerText = score
 rikuScoreDisplay.innerText = rikuScore
 soraFinalScoreDisplay.innerText = score
 rikuFinalScoreDisplay.innerText = rikuScore
+livesDisplay.innerText = '❤️'.repeat(lives)
+rikuLivesDisplay.innerText = '💙'.repeat(rikuLives)
 
 //* Executions
 // Grid creator function
@@ -158,7 +159,6 @@ function generateGoofy() {
   }
 }
 
-
 // Add and remove Sora functions
 function addChar() {
   if (stopAddChar) {
@@ -218,7 +218,7 @@ function keyPress(evt) {
           currentPos--
         }
         addChar()
-      // If moving into Donald's or Goofy's cell, remove their class, increase score and   add character
+      // If moving into Donald's or Goofy's cell, remove their class, increase score and add character
       } else if (cells[currentPos].classList.contains('donald')) {
         audio.src = 'audio/donald-help.wav'
         audio.play()
@@ -271,7 +271,7 @@ function keyPress(evt) {
           rikuCurrentPos--
         }
         addRiku()
-      // If moving into Donald's or Goofy's cell, remove their class, increase score and  add  character
+      // If moving into Donald's or Goofy's cell, remove their class, increase score and add character
       } else if (cells[rikuCurrentPos].classList.contains('donald')) {
         audio.src = 'audio/donald-help.wav'
         audio.play()
@@ -457,7 +457,7 @@ function collision() {
   // Remove a life
   lives -= 1
   // Update lives display
-  livesDisplay.innerText = lives > 0 ? '💚'.repeat(lives) : '🤍'
+  livesDisplay.innerText = lives > 0 ? '❤️'.repeat(lives) : '🤍'
   // Check for game over
   cells.forEach(cell => {
     if (cell.classList.contains('riku')) {
@@ -499,7 +499,7 @@ function rikuCollision() {
   // Remove a life
   rikuLives -= 1
   // Update lives display
-  rikuLivesDisplay.innerText = rikuLives > 0 ? '💜'.repeat(rikuLives) : '🤍'
+  rikuLivesDisplay.innerText = rikuLives > 0 ? '💙'.repeat(rikuLives) : '🤍'
   // Check for game over
   if (rikuLives === 0 && lives === 0) {
     audio.src = 'audio/riku-not-yet.wav'
@@ -633,8 +633,8 @@ function playAgain() {
   gameOverScreen.style.display = 'none'
   lives = 3
   rikuLives = 3
-  livesDisplay.innerText = '💚'.repeat(lives)
-  rikuLivesDisplay.innerText = '💜'.repeat(rikuLives)
+  livesDisplay.innerText = '❤️'.repeat(lives)
+  rikuLivesDisplay.innerText = '💙'.repeat(rikuLives)
   score = 0
   rikuScore = 0
   scoreDisplay.innerText = score

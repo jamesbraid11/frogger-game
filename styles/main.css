@@ -8,13 +8,12 @@ body {
   font-family: 'Orbitron', sans-serif;
   font-size: 15px;
   background-image: url('../assets/red-tiled-background.png');
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 header {
-  /* background-color: aqua; */
   height: 20%;
   display: flex;
   flex-direction: column;
@@ -50,7 +49,6 @@ button.two-player {
 }
 
 .blurb-and-rules {
-  /* background-color: blue; */
   flex-grow: 1;
   width: 22%;
   height: 75vh;
@@ -61,7 +59,6 @@ button.two-player {
 }
 
 .scores-and-lives {
-  /* background-color: brown; */
   flex-grow: 1;
   width: 22%;
   height: 75vh;
@@ -85,7 +82,6 @@ button.two-player {
 }
 
 .grid-wrapper {
-  /* background-color: rgb(28, 215, 31); */
   display: flex;
   justify-content: center;
   align-items: center;
