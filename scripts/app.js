@@ -98,7 +98,6 @@ function twoPlayerMode() {
   rikuGameOverMsg.style.display = 'block'
   // Hide two player button
   twoPlayerBtn.style.display = 'none'
-  // twoPlayerBtn.classList.remove('two-player') - not removing class
   // Add one-player class to button
   // Change inner text to '1 Player'
 }
