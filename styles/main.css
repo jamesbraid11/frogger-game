@@ -6,8 +6,8 @@ body {
   margin: 0;
   height: 100vh;
   font-family: 'Orbitron', sans-serif;
-  font-size: 14px;
-  background-image: url('../assets/blue-tiled-background.png');
+  font-size: 15px;
+  background-image: url('../assets/red-tiled-background.png');
   /* background-repeat: no-repeat; */
   background-size: cover;
   background-position: center;
@@ -73,7 +73,7 @@ button.two-player {
 
 .container {
   background-color: white;
-  width:  80%;
+  width:  85%;
   height: 70vh;
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@ button.two-player {
   width: 58vw;
   display: none;
   margin-top: 5vh;
-  border: 5px solid;
+  border: 5px solid white;
   border-radius: 20px;
   background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/sora-and-riku.jpeg');
   background-repeat: no-repeat;
