@@ -97,7 +97,7 @@ function twoPlayerMode() {
   // Unhide riku final score display
   rikuGameOverMsg.style.display = 'block'
   // Hide two player button
-  twoPlayerBtn.style.display = 'none'
+  twoPlayerBtn.setAttribute('disabled', true)
   // Add one-player class to button
   // Change inner text to '1 Player'
 }
@@ -645,7 +645,7 @@ function playAgain() {
   stopAddRiku = false
 
   addChar(currentPos = startPos)
-  twoPlayerBtn.style.display = 'block'
+  twoPlayerBtn.removeAttribute('disabled', true)
   rikuDisplay.forEach(element => {
     element.style.display = 'none'
   })
