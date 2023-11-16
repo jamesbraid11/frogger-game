@@ -527,7 +527,6 @@ function targetReached() {
   audio.src = 'audio/sora-lets-go.wav'
   audio.play()
   removeChar()
-  removeRiku()
   clearInterval(col1Interval)
   clearInterval(col2Interval)
   clearInterval(col4Interval)
@@ -552,10 +551,19 @@ function targetReached() {
   generateDonald()
   generateGoofy()
   generateNamine()
-  addChar(currentPos = startPos)
+  stopCharMovement = true
+  setTimeout(function(){
+    addChar(currentPos = startPos)
+    stopCharMovement = false
+  }, 1000)
+  stopRikuMovement = true
   cells.forEach(cell => {
     if (cell.classList.contains('riku')) {
-      addRiku(rikuCurrentPos = rikuStartPos)
+      removeRiku()
+      setTimeout(function(){
+        addRiku(rikuCurrentPos = rikuStartPos)
+        stopRikuMovement = false
+      }, 1000)
     }
   })
 }
@@ -591,8 +599,16 @@ function rikuTargetReached() {
   generateDonald()
   generateGoofy()
   generateNamine()
-  addRiku(rikuCurrentPos = rikuStartPos)
-  addChar(currentPos = startPos)
+  stopRikuMovement = true
+  setTimeout(function(){
+    addRiku(rikuCurrentPos = rikuStartPos)
+    stopRikuMovement = false
+  }, 1000)
+  stopCharMovement = true
+  setTimeout(function(){
+    addChar(currentPos = startPos)
+    stopCharMovement = false
+  }, 1000)
 }
 
 // Game over function

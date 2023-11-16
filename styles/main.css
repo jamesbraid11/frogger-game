@@ -46,6 +46,12 @@ button.two-player {
   border: 2.5px solid;
   border-radius: 20px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.two-player:hover {
+  background-color: black;
+  color: white;
 }
 
 .blurb-and-rules {
@@ -187,6 +193,12 @@ h4 {
   border-radius: 20px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
   margin-top: 45px;
+  cursor: pointer;
+}
+
+.play-again:hover {
+  background-color: black;
+  color: white;
 }
 
 .riku-display {
