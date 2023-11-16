@@ -34,9 +34,9 @@ let col5Interval
 let col7Interval
 let col8Interval
 let darkFigureSpeed = 1000
-let lexaeusSpeed = 500
-let larxeneSpeed = 450
-let marluxiaSpeed = 400
+let vexenSpeed = 500
+let axelSpeed = 475
+let marluxiaSpeed = 450
 let stopCharMovement = false
 let stopRikuMovement = true
 let stopAddChar = false
@@ -203,7 +203,7 @@ function keyPress(evt) {
         currentPos++
       }
       // If moving into an enemy cell, invoke collision function
-      if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('lexaeus') || cells[currentPos].classList.contains('larxene') || cells[currentPos].classList.contains('marluxia')) {
+      if (cells[currentPos].classList.contains('dark-figure') || cells[currentPos].classList.contains('vexen') || cells[currentPos].classList.contains('axel') || cells[currentPos].classList.contains('marluxia')) {
         collision()
       // If trying to move into a pillar or player 2's cell, send back to previous position
       } else if (cells[currentPos].classList.contains('pillar') || cells[currentPos].classList.contains('riku')) {
@@ -256,7 +256,7 @@ function keyPress(evt) {
         rikuCurrentPos++
       }
       // If moving into an enemy cell, invoke collision function
-      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].classList.contains('lexaeus') || cells[rikuCurrentPos].classList.contains('larxene') || cells[rikuCurrentPos].classList.contains('marluxia')) {
+      if (cells[rikuCurrentPos].classList.contains('dark-figure') || cells[rikuCurrentPos].classList.contains('vexen') || cells[rikuCurrentPos].classList.contains('axel') || cells[rikuCurrentPos].classList.contains('marluxia')) {
         rikuCollision()
       // If trying to move into a pillar or player 1's cell, send back to previous position
       } else if (cells[rikuCurrentPos].classList.contains('pillar') || cells[rikuCurrentPos].classList.contains('char')) {
@@ -328,25 +328,25 @@ function col1Movement() {
 // Enemy movement column 2
 const enemyCol2 = cells.filter(cell => parseInt(cell.id) % 10 === 2)
 
-const col2Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'lexaeus']
+const col2Classes = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'vexen']
 
 function col2Movement() {
   col2Interval = setInterval(() => {
     enemyCol2.forEach(cell => {
-      cell.classList.remove('blank', 'lexaeus')
+      cell.classList.remove('blank', 'vexen')
     })
     col2Classes.push(col2Classes[0])
     col2Classes.shift(col2Classes[0])
     enemyCol2.forEach((cell, i) => {
       cell.classList.add(col2Classes[i])
-      if (cell.classList.contains('lexaeus') && cell.classList.contains('char')) {
+      if (cell.classList.contains('vexen') && cell.classList.contains('char')) {
         collision()
       }
-      if (cell.classList.contains('lexaeus') && cell.classList.contains('riku')) {
+      if (cell.classList.contains('vexen') && cell.classList.contains('riku')) {
         rikuCollision()
       }
     })
-  }, lexaeusSpeed)
+  }, vexenSpeed)
 }
 
 // Enemy movement column 4
@@ -376,25 +376,25 @@ function col4Movement() {
 // Enemy movement column 5
 const enemyCol5 = cells.filter(cell => parseInt(cell.id) % 10 === 5)
 
-const col5Classes = ['larxene', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
+const col5Classes = ['axel', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
 
 function col5Movement() {
   col5Interval = setInterval(() => {
     enemyCol5.forEach(cell => {
-      cell.classList.remove('blank', 'larxene')
+      cell.classList.remove('blank', 'axel')
     })
     col5Classes.unshift(col5Classes[9])
     col5Classes.pop(col5Classes[9])
     enemyCol5.forEach((cell, i) => {
       cell.classList.add(col5Classes[i])
-      if (cell.classList.contains('larxene') && cell.classList.contains('char')) {
+      if (cell.classList.contains('axel') && cell.classList.contains('char')) {
         collision()
       }
-      if (cell.classList.contains('larxene') && cell.classList.contains('riku')) {
+      if (cell.classList.contains('axel') && cell.classList.contains('riku')) {
         rikuCollision()
       }
     })
-  }, larxeneSpeed)
+  }, axelSpeed)
 }
 
 // Enemy movement column 7
@@ -534,10 +534,10 @@ function targetReached() {
   clearInterval(col5Interval)
   clearInterval(col7Interval)
   clearInterval(col8Interval)
-  darkFigureSpeed -= 100
-  lexaeusSpeed -= 50
-  larxeneSpeed -= 50
-  marluxiaSpeed -= 50
+  darkFigureSpeed -= 50
+  vexenSpeed -= 25
+  axelSpeed -= 25
+  marluxiaSpeed -= 25
   col1Movement()
   col2Movement()
   col4Movement()
@@ -573,10 +573,10 @@ function rikuTargetReached() {
   clearInterval(col5Interval)
   clearInterval(col7Interval)
   clearInterval(col8Interval)
-  darkFigureSpeed -= 100
-  lexaeusSpeed -= 50
-  larxeneSpeed -= 50
-  marluxiaSpeed -= 50
+  darkFigureSpeed -= 50
+  vexenSpeed -= 25
+  axelSpeed -= 25
+  marluxiaSpeed -= 25
   col1Movement()
   col2Movement()
   col4Movement()
@@ -609,9 +609,9 @@ function gameOver() {
   clearInterval(col7Interval)
   clearInterval(col8Interval)
   darkFigureSpeed = 1000
-  lexaeusSpeed = 500
-  larxeneSpeed = 450
-  marluxiaSpeed = 400
+  vexenSpeed = 500
+  axelSpeed = 475
+  marluxiaSpeed = 450
   col1Movement()
   col2Movement()
   col4Movement()

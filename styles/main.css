@@ -225,14 +225,14 @@ h4 {
   background-size: contain;
 }
 
-.game-grid div.larxene {
-  background-image: url('../assets/larxene.gif');
+.game-grid div.vexen {
+  background-image: url('../assets/vexen.gif');
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.game-grid div.lexaeus {
-  background-image: url('../assets/lexaeus.gif');
+.game-grid div.axel {
+  background-image: url('../assets/axel.gif');
   background-repeat: no-repeat;
   background-size: contain;
 }
