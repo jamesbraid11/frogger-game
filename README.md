@@ -172,7 +172,7 @@ It was necessary to return both players to their starting position if the target
 After updating the game over and play again functions to include everything necessary for player two, the project was then complete with seamless simultaneous two player functionality. I was ecstatic with what I had achieved, but also could not stop my mind from conjuring many ideas of how to improve the game further!
 
 
-## Key Learnings
+## Key Learning
 
 After overcoming the major hurdle of the enemy movement function, coding the rest of the project really flowed. I became very confident with:
 - Ordering control flow.
