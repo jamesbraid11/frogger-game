@@ -57,7 +57,7 @@ This was a solo project for which we had a full week to complete (including plan
 
 I began my planning with a wireframe of how the game would look on a desktop browser. I labelled the elements with their required HTML tags and classes where necessary. Classes were assigned according to how the elements were to be styled in CSS or selected for use in JavaScript. I tried to make these as semantic as I could for ease of reference. I colour-coded the HTML elements based on their hierarchy on the page for my own reference.
 
-![1-wireframe](https://github.com/jamesbraid11/frogger-game/assets/147768485/5cc863c4-e3a0-4481-8e94-e7c5f2c65c6c)
+<img width="1213" alt="1-wireframe" src="https://github.com/jamesbraid11/frogger-game/assets/147768485/19223262-9868-42fe-b204-5a3b487669c7">
 
 I then noted down any key CSS styling that I did not want to forget, mainly for displaying and sizing elements correctly on the page.
 
